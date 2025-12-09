@@ -1,45 +1,50 @@
 package com.example.finalproject.view;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.finalproject.R;
 import com.example.finalproject.controller.ItemController;
 import com.example.finalproject.model.Item;
 
-public class AddEditActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity {
     private EditText etTitle, etDescription;
-    private Button btnSave;
+    private Button btnSave, btnCancel;
 
-    private ItemController controller;
-    private int itemId = -1;
+    private ItemController itemController;
+    private long itemId = -1;
+    private Item item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
 
-        controller = new ItemController(this);
+        itemController = new ItemController(this);
 
         etTitle = findViewById(R.id.etTitle);
         etDescription = findViewById(R.id.etDescription);
         btnSave = findViewById(R.id.btnSave);
+        btnCancel = findViewById(R.id.btnCancel);
 
-        if (getIntent().hasExtra("item_id")) {
-            itemId = getIntent().getIntExtra("item_id", -1);
-            Item item = controller.getItem(itemId);
+        btnSave.setText("Сохранить изменения");
 
-            if (item != null) {
-                etTitle.setText(item.getTitle());
-                etDescription.setText(item.getDescription());
-            }
+        itemId = getIntent().getLongExtra("item_id", -1);
+        item = itemController.getItem(itemId);
+
+        if (item != null) {
+            etTitle.setText(item.getTitle());
+            etDescription.setText(item.getDescription());
         }
 
-        btnSave.setOnClickListener(v -> saveItem());
+        btnSave.setOnClickListener(v -> editItem());
+        btnCancel.setOnClickListener(v -> finish());
     }
 
-    private void saveItem() {
+    private void editItem() {
         String title = etTitle.getText().toString().trim();
         String description = etDescription.getText().toString().trim();
 
@@ -48,12 +53,10 @@ public class AddEditActivity extends AppCompatActivity {
             return;
         }
 
-        if (itemId == -1) {
-            controller.addItem(new Item(title, description));
-        } else {
-            controller.updateItem(new Item(itemId, title, description));
-        }
+        item.setTitle(title);
+        item.setDescription(description);
 
+        itemController.updateItem(item);
         finish();
     }
 }

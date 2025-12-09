@@ -35,33 +35,30 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // CRUD API
-    public long insert(Item item) {
+    public void insert(Item item) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_TITLE, item.getTitle());
         cv.put(COL_DESC, item.getDescription());
         cv.put(COL_DONE, item.isDone() ? 1 : 0);
-        long id = db.insert(TABLE, null, cv);
+        db.insert(TABLE, null, cv);
         db.close();
-        return id;
     }
 
-    public int update(Item item) {
+    public void update(Item item) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_TITLE, item.getTitle());
         cv.put(COL_DESC, item.getDescription());
         cv.put(COL_DONE, item.isDone() ? 1 : 0);
-        int rows = db.update(TABLE, cv, COL_ID + "=?", new String[]{String.valueOf(item.getId())});
+        db.update(TABLE, cv, COL_ID + "=?", new String[]{String.valueOf(item.getId())});
         db.close();
-        return rows;
     }
 
-    public int delete(long id) {
+    public void delete(long id) {
         SQLiteDatabase db = getWritableDatabase();
-        int rows = db.delete(TABLE, COL_ID + "=?", new String[]{String.valueOf(id)});
+        db.delete(TABLE, COL_ID + "=?", new String[]{String.valueOf(id)});
         db.close();
-        return rows;
     }
 
     public Item get(long id) {

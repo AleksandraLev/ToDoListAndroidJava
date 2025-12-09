@@ -5,15 +5,15 @@ import com.example.finalproject.model.Item;
 import java.util.List;
 
 public class ItemController {
-    private DBHelper db;
+    private final DBHelper dbHelper;
 
     public ItemController(Context ctx) {
-        db = new DBHelper(ctx);
+        dbHelper = new DBHelper(ctx);
     }
 
-    public long addItem(Item item) { return db.insert(item); }
-    public int updateItem(Item item) { return db.update(item); }
-    public int deleteItem(long id) { return db.delete(id); }
-    public Item getItem(long id) { return db.get(id); }
-    public List<Item> getAll() { return db.getAll(); }
+    public void addItem(Item item) { dbHelper.insert(item); }
+    public void updateItem(Item item) { dbHelper.update(item); }
+    public void deleteItem(long id) { dbHelper.delete(id); }
+    public Item getItem(long id) { return dbHelper.get(id); }
+    public List<Item> getAll() { return dbHelper.getAll(); }
 }

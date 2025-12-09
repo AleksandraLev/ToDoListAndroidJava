@@ -12,13 +12,6 @@ public class Item {
         this.done = false;
     }
 
-    public Item(long id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.done = false;
-    }
-
     public Item(long id, String title, String description, boolean done) {
         this.id = id;
         this.title = title;

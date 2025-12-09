@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AddEditActivity">
+    tools:context=".view.AddActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,6 +34,14 @@
             android:layout_height="wrap_content"
             android:text="Сохранить"
             android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Отмена"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#CCCCCC" />
 
     </LinearLayout>
 </ScrollView>
