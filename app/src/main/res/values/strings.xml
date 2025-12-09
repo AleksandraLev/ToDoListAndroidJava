@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyApp</string>
+    <string name="add">Добавить</string>
+    <string name="title_hint">Заголовок</string>
+    <string name="description_hint">Описание</string>
+    <string name="save">Сохранить</string>
+    <string name="detail_title">Подробности</string>
+</resources>
